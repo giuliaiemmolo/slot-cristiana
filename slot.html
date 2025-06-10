@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Slot Cristiana</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: sans-serif;
+    }
+
+    body {
+      background: url('sfondo-slot.png') no-repeat center center;
+      background-size: cover;
+      position: relative;
+    }
+
+    .rullo {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background-color: rgba(255,255,255,0);
+      border-radius: 10px;
+      font-size: 30px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+
+    #rullo1 {
+      top: 34%;
+      left: 30%;
+    }
+
+    #rullo2 {
+      top: 34%;
+      left: 50%;
+    }
+
+    #spin-btn {
+  	position: absolute;
+  	top: 77.5%;
+  	left: 50%;
+  	transform: translateX(-50%);
+  	width: 265px;
+  	height: 70px;
+  	background-color: #f28c23;
+  	color: black;
+  	font-size: 30px;
+  	font-weight: bold;
+  	border: none;
+  	border-radius: 8px;
+  	cursor: pointer;
+}
+  </style>
+</head>
+<body>
+
+  <div class="rullo" id="rullo1">???</div>
+  <div class="rullo" id="rullo2">???</div>
+  <button id="spin-btn" onclick="spin()">BESTEMMIA</button>
+
+  <script>
+    const parole1 = ["DIO", "MADONNA"];
+
+    const paroleCompatibili = {
+      DIO: ["STRONZO", "MALEDETTO", "BASTARDO", "CANE", "MAIALE", "LADRO"],
+      MADONNA: ["PUTTANA", "TROIA", "BASTARDA"]
+    };
+
+    function randomWord(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function spin() {
+      let counter = 0;
+      const reel1 = document.getElementById("rullo1");
+      const reel2 = document.getElementById("rullo2");
+
+      const interval = setInterval(() => {
+          const parola1 = randomWord(parole1); // scegli parola1
+          const parola2 = randomWord(paroleCompatibili[parola1]); // scegli compatibile
+
+          reel1.textContent = parola1;
+          reel2.textContent = parola2;
+
+    counter++;
+    if (counter > 20) {
+      clearInterval(interval);
+    }
+  }, 100);
+}
+  </script>
+
+</body>
+</html>
